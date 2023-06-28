@@ -1,0 +1,24 @@
+{
+    "name": "hanoivip/misc",
+    "description": "Misc",
+    "type": "library",
+    "license": "MIT",
+    "autoload" : {
+		"psr-4" : {
+			"Hanoivip\\Misc\\" : "src/"
+		}
+	},
+	"require" : {
+		"php" : ">=7.0.0",
+		"laravel/framework" : ">=5.5",
+		"hanoivip/events" : "dev-master"
+	},
+	"extra" : {
+		"laravel" : {
+			"providers" : [
+				"Hanoivip\\Misc\\ModServiceProvider",
+				"Hanoivip\\Misc\\EventServiceProvider"
+			]
+		}
+	}
+}
