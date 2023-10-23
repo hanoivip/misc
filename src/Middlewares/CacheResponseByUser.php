@@ -32,12 +32,12 @@ class CacheResponseByUser
             $requestId = md5($userId . '|' . $request->getMethod() . '|' . $request->url() . '|' . $inputHash);
             if (Cache::has($requestId))
             {
-                Log::debug("Respones cache by user $userId hit");
+                //Log::debug("Respones cache by user $userId hit");
                 return response(Cache::get($requestId))->header('US-CACHED', 'hit');
             }
             else
             {
-                Log::debug("Respones cache by user $userId not found.. genearte content..");
+                //Log::debug("Respones cache by user $userId not found.. genearte content..");
                 $response = $next($request);
                 Cache::put($requestId, $response->getContent(), Carbon::now()->addMinutes($expires));
                 return $response->header('US-CACHED', 'missed');

@@ -35,14 +35,13 @@ class CacheResponse
         $requestId = md5($request->getMethod() . '|' . $request->url() . '|' . $inputHash);
         if (Cache::has($requestId))
         {
-            Log::debug("Respones cache hit");
-            Log::debug(Cache::get($requestId));
+            //Log::debug("Respones cache hit");
             $cache = Cache::get($requestId);
             return response($cache)->header('US-CACHED', 'hit');
         }
         else 
         {
-            Log::debug("Respones cache not found.. genearte content..");
+            //Log::debug("Respones cache not found.. genearte content..");
             $response = $next($request);
             $hitResponse = $response->getContent();
             Cache::put($requestId, $hitResponse, Carbon::now()->addMinutes($expires));
