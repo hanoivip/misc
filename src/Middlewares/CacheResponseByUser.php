@@ -17,7 +17,7 @@ class CacheResponseByUser
         {
             $userId = Auth::user()->getAuthIdentifier();
             $inputHash = '';
-            $data = $request->all();
+            $data = $request->query();
             if (!empty($data))
             {
                 $raw = '';
@@ -33,7 +33,7 @@ class CacheResponseByUser
             if (Cache::has($requestId))
             {
                 Log::debug("Respones cache by user $userId hit");
-                return Cache::get($requestId);
+                return response(Cache::get($requestId))->header('US-CACHED', 'hit');
             }
             else
             {
