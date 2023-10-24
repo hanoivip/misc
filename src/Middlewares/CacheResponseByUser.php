@@ -17,7 +17,7 @@ class CacheResponseByUser
         {
             $userId = Auth::user()->getAuthIdentifier();
             $inputHash = '';
-            $data = $request->query();
+            $data = $request->all();
             if (!empty($data))
             {
                 $raw = '';
@@ -28,7 +28,6 @@ class CacheResponseByUser
                 }
                 $inputHash = md5($raw);
             }
-            
             $requestId = md5($userId . '|' . $request->getMethod() . '|' . $request->url() . '|' . $inputHash);
             if (Cache::has($requestId))
             {
